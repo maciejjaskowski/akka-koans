@@ -1,0 +1,21 @@
+
+
+1. Write a test in file MysteriousCalculatorSuite to check what mathematical constant does MysteriousCalculator calculate.
+2. Do the same for WorkerSuite.
+2b. [optional] Worker extends Actor with MysteriousCalculation. 
+How would the testability change if Worker extended only MysteriousCalculation? 
+3. Make changes to PartialFunctionSuite.scala to functions marked "???" so that PartialFuncionSuite pass all tests
+4. Make changes to Master so that MasterSuite pass all tests. If the tests pass isolated but not as a suite then either:
+* split this test into two or
+* use what's written under "Asynchronous Integration Testing with TestKit on http://doc.akka.io/docs/akka/snapshot/scala/testing.html
+
+6. It is cumbersome to pass Worker as parameter to Master. Introduce Worker as a subActor of Master. Use context.actorOf() method. 
+How to preserve testability? [traits?] 
+7. Try to parallelize the computation using router or Props[Worker].withRouter(RoundRobinRouter(nrOfWorkers)), name = "workerRouter")
+8. apply necessary changes so that you can verify how much faster the computation is after the change (if at all ;)
+
+Literature:
+* http://weblogs.java.net/blog/manningpubs/archive/2012/09/28/testing-actors-akka
+* http://doc.akka.io/docs/akka/snapshot/scala/actors.html
+* http://doc.akka.io/docs/akka/snapshot/scala/futures.html
+* http://doc.akka.io/docs/akka/snapshot/intro/getting-started.html
