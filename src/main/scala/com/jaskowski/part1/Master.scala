@@ -20,17 +20,16 @@ class Master(listener: ActorRef, worker: ActorRef) extends Actor
 
   var sum: Double = _
   var nOfResultsCollectedSoFar: Int = _
-
+  val nOfWorkers: Int = 10
 
   def receive = {
     case Calculate =>      
-      for (i <- 0 until 10) doWork(i * 100, 100)
+      for (i <- 0 until nOfWorkers) doWork(i * 100, 100)
     case Result(value) =>
       sum += value
       nOfResultsCollectedSoFar += 1
       println (nOfResultsCollectedSoFar)
-      if (nOfResultsCollectedSoFar == 10) {
-        context.stop(self)
+      if (nOfResultsCollectedSoFar == nOfWorkers) {
         println("stop")
       }
   }

@@ -28,22 +28,7 @@ class MasterSuite extends FunSuite {
    * and unignore the other test
    */
   test("tells listener the result of approximation") {
-
-    //when
-    master ! Calculate
-
-    // then
-    val approximation = listener.expectMsgClass(classOf[Approximation])
-    assert(approximation.value === 10.0)
-
-  }
-
-  /**
-   * use worker in "doWork" method
-   */
-  ignore("uses worker to calculate the result") {
-
-    worker.setAutoPilot(autoPilotReturning(1))
+	
     //when
     master ! Calculate
 
@@ -53,11 +38,26 @@ class MasterSuite extends FunSuite {
 
   }
 
+  /**
+   * use worker in "doWork" method
+   */
+  test("uses worker to calculate the result") {
+
+    worker.setAutoPilot(autoPilotReturning(2))
+    //when
+    master ! Calculate
+
+    // then
+    val approximation = listener.expectMsgClass(classOf[Approximation])
+    assert(approximation.value === 20)
+
+  }
+
   def autoPilotReturning(value: Int) = new AutoPilot {
     def run(sender: ActorRef, msg: Any): Option[AutoPilot] =
       msg match {
         case "stop" => None
-        case x => sender ! Result(value); Some(this)
+        case Work(_,_) => sender ! Result(value); Some(this)
       }
 
   }
