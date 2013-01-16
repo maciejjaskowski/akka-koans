@@ -1,6 +1,8 @@
 
 
-1. [Super Quick ScalaTest Introduction] Write a test in file MysteriousCalculatorSuite to check what mathematical constant does MysteriousCalculator calculate.
+1a. [Super Quick ScalaTest Introduction] Write a test in file MysteriousCalculatorSuite to check what mathematical constant does MysteriousCalculator calculate.
+1b. [optional] consider using ShouldMatchers and "x should be (y plusOrMinus 0.01)" instead of "assert(x === y)"
+
 2a. [Akka basics] Do the same for WorkerSuite.
 2b. Can you send to the worker a Result() message instead of Work ? What happens then? Find out in the Akka documentation if necessary.
 
