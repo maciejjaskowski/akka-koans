@@ -22,7 +22,7 @@ class Master(listener: ActorRef, worker: ActorRef) extends Actor
   var nOfResultsCollectedSoFar: Int = _
   val nOfWorkers: Int = 10
 
-  def receive = {
+  def receive: PartialFunction[Any, Unit] = {
     case Calculate =>      
       for (i <- 0 until nOfWorkers) doWork(i * 100, 100)
     case Result(value) =>

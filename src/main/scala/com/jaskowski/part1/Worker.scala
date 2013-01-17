@@ -15,7 +15,7 @@ case class Result(value: Double) extends WorkerMessage
 
 class Worker extends Actor with MysteriousCalculator{
 
-  def receive = {
+  def receive: PartialFunction[Any, Unit] = {
     case Work(start, nrOfElements) =>
       sender ! Result(calculateValueFor(start, nrOfElements)) // perform the work
   }
